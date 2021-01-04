@@ -1,0 +1,19 @@
+created:
+    - database/factories/Models/CategoriaFactory.php
+    - database/factories/Models/PeliculaFactory.php
+    - database/factories/Models/DirectorFactory.php
+    - database/migrations/2020_12_27_050843_create_categorias_table.php
+    - database/migrations/2020_12_27_050844_create_peliculas_table.php
+    - database/migrations/2020_12_27_050845_create_directors_table.php
+    - database/migrations/2020_12_27_050846_create_director_pelicula_table.php
+    - app/Models/Categoria.php
+    - app/Models/Pelicula.php
+    - app/Models/Director.php
+    - database/seeds/PeliculaSeeder.php
+    - database/seeds/CategoriaSeeder.php
+    - database/seeds/DirectorSeeder.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Models\Categoria: { parent_id: 'id foreing:categories nullable', lft: 'integer unsigned nullable', rgt: 'integer unsigned nullable', depth: 'integer unsigned nullable', nombre: string, slug: 'string unique', descripcion: string, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Pelicula } }
+    Models\Pelicula: { categoria_id: 'id foreign', director: string, titulo: string, portada: 'string nullable', slug: 'string unique default:''''', descripcion: longtext, valoracion: integer, año: date, aracteristicas: 'boolean default:0', timestamps: timestamps, softDelete: true, relationships: { belongsToMany: Director } }
+    Models\Director: { nombre: string, 'primer apellido': string, 'segundo apellido': string, slug: 'string unique', nacionalidad: string, 'fecha de nacimiento': date, descripcion: string, timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Pelicula } }

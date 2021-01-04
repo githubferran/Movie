@@ -1,0 +1,44 @@
+models:
+  Models\Categoria:
+    parent_id: id foreing:categories nullable
+    lft: integer unsigned nullable
+    rgt: integer unsigned nullable
+    depth: integer unsigned nullable
+    nombre: string
+    slug: string unique
+    descripcion: longtext
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Pelicula
+
+  Models\Pelicula:
+    categoria_id: id foreign
+    director: string
+    titulo: string
+    portada: string nullable
+    trailer: longblob nullable
+    slug: string unique default:''
+    descripcion: longtext
+    valoracion: integer
+    año: date
+    caracteristicas: boolean default:0
+    timestamps: true
+    softDelete: true
+    relationships:
+      belongsToMany: Director
+
+  Models\Director:
+    nombre: string			
+    primer apellido: string
+    segundo apellido: string
+    slug: string unique
+    nacionalidad: string
+    fecha de nacimiento: date
+    descripcion: string	
+    timestamps: true
+    softDeletes: true
+    relationships:
+      belongsToMany: Pelicula
+
+seeders: Pelicula, Categoria, Director
